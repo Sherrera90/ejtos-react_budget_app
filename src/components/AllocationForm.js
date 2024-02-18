@@ -8,7 +8,17 @@ const AllocationForm = (props) => {
     const [name, setName] = useState('');
     const [cost, setCost] = useState('');
     const [action, setAction] = useState('');
-
+    
+    //Allocation only accepts number values
+    const validNumber = /^\d{0,10}$/;
+    const handleChange = ({target}) => {
+       
+        const newNumber = target.value;
+        const isValid =validNumber.test(newNumber);
+        if (isValid){
+            setCost(newNumber);
+        }
+    }
     const submitEvent = () => {
 
             if(cost > remaining) {
@@ -66,7 +76,7 @@ const AllocationForm = (props) => {
                         id='cost'
                         value={cost}
                         style={{ marginLeft: '2rem' , size: 10}}
-                        onChange={(event) => setCost(event.target.value)}>
+                        onChange={handleChange}>
                         </input>
 
                     <button className="btn btn-primary" onClick={submitEvent} style={{ marginLeft: '2rem' }}>
